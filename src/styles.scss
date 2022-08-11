@@ -1,0 +1,12 @@
+@import '../node_modules/primereact/resources/primereact.min.css';
+@import '../node_modules/primereact/resources/themes/lara-light-teal/theme.css';
+@import '../node_modules/primeflex/primeflex.scss';
+
+html, body {
+    background-color: var(--surface-ground);
+    height: 100%;
+}
+
+* {
+    font-family: var(--font-family);
+}

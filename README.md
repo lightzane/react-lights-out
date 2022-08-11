@@ -1,3 +1,9 @@
+# React Lights Out
+
+Play the game "Lights Out" created in React App
+
+See demo: https://lightzane.github.io/react-lights-out
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
