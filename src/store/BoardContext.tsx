@@ -50,7 +50,7 @@ export const BoardProvider: React.FC<{ children: React.ReactNode; }> = ({ childr
         setBoard(JSON.parse(JSON.stringify(board)));
     };
 
-    const switchLight = (x: number, y: number) => {
+    const switchLight = (x: number, y: number): void => {
         // origin
         toggleLight(x, y);
 
@@ -78,15 +78,15 @@ export const BoardProvider: React.FC<{ children: React.ReactNode; }> = ({ childr
         updateBoard(board);
     };
 
-    const toggleLight = (x: number, y: number) => {
+    const toggleLight = (x: number, y: number): void => {
         const binary = board[y][x];
         board[y][x] = binary === 1 ? 0 : 1;
     };
 
-    const startGame = () => {
+    const startGame = (): void => {
         // Repeat 25x repeating the random toggleLight
         if (board.length) {
-            const maxRepetition = Math.floor(Math.random() * 25);
+            const maxRepetition = Math.floor(Math.random() * 50);
             for (let i = 0; i < maxRepetition; i++) {
                 if (Math.random() > 0.5) {
                     const x = Math.floor(Math.random() * 5);

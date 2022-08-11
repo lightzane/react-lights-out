@@ -11,6 +11,7 @@
     "@types/node": "^16.11.47",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "howler": "^2.2.3",
     "primeflex": "^3.2.1",
     "primereact": "^8.3.0",
     "react": "^18.2.0",
@@ -19,6 +20,7 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
+    "postinstall": "npm start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -41,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.7"
   }
 }

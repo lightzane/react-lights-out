@@ -9,37 +9,59 @@ import { Badge } from 'primereact/badge';
 import { useState } from 'react';
 import { Toast } from 'primereact/toast';
 import { useRef } from 'react';
+import { SOUND } from '../../audio/sound.service';
+
+const LOCAL_STORAGE_MOVES = 'moves';
 
 export const Board: React.FC = () => {
+
+    const m = localStorage.getItem(LOCAL_STORAGE_MOVES);
+
+    const savedMove: number = !isNaN(+m) ? +m : 0;
 
     const boardCtx = useContext(BoardContext);
 
     const switchLight = boardCtx.switchLight;
 
-    const [totalMoves, setTotalMoves] = useState(0);
+    const [totalMoves, setTotalMoves] = useState(savedMove || 0);
+
+    const [isGameOver, setIsGameOver] = useState(false);
 
     const toast = useRef<Toast>();
 
     const rowLightClicked = (coordinates: XY) => {
+        SOUND.Move.play();
+
         const { x, y } = coordinates;
 
         // update origin
         switchLight(x, y);
 
-        setTotalMoves(current => current + 1);
+        setTotalMoves(current => {
+            const newMove = current + 1;
+            localStorage.setItem(LOCAL_STORAGE_MOVES, newMove.toString());
+            return newMove;
+        });
 
         if (boardCtx.isAllLightsOn()) {
+            SOUND.Winner.play();
             toast.current.show({
                 severity: 'success',
                 summary: 'Lights On!',
                 detail: 'All lights are now turned ON'
             });
+            setIsGameOver(true);
         }
     };
 
     const resetHandler = () => {
+        SOUND.Reset.play();
         boardCtx.startGame();
-        setTotalMoves(0);
+        if (isGameOver) {
+            setTotalMoves(0);
+            setIsGameOver(false);
+            localStorage.clear();
+        }
     };
 
     return <>
